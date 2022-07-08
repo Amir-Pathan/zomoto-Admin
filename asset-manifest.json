@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Amir-Pathan/zomoto-Admin/static/css/main.073c9b0a.css",
+    "main.js": "/Amir-Pathan/zomoto-Admin/static/js/main.fcf00533.js",
+    "static/js/787.f309f389.chunk.js": "/Amir-Pathan/zomoto-Admin/static/js/787.f309f389.chunk.js",
+    "static/media/logo.svg": "/Amir-Pathan/zomoto-Admin/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/Amir-Pathan/zomoto-Admin/index.html",
+    "main.073c9b0a.css.map": "/Amir-Pathan/zomoto-Admin/static/css/main.073c9b0a.css.map",
+    "main.fcf00533.js.map": "/Amir-Pathan/zomoto-Admin/static/js/main.fcf00533.js.map",
+    "787.f309f389.chunk.js.map": "/Amir-Pathan/zomoto-Admin/static/js/787.f309f389.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.fcf00533.js"
+  ]
+}
