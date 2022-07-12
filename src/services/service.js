@@ -31,6 +31,46 @@ const Services ={
 
         })
 
+    },
+
+    isAble:(no)=>{
+
+        return new Promise((resolve,reject)=>{
+
+            axios.get('http://localhost:8089/sellers/'+no).then((res)=>{
+
+                resolve(res.data.length)
+  
+          }).catch((err)=>{
+  
+              reject(err)
+  
+          })
+
+        })
+
+    },
+
+    newAccount:(user)=>{
+
+        return new Promise((resolve,reject)=>{
+
+            axios.post('http://localhost:8089/sellers/',user).then((res)=>{
+
+                localStorage.setItem('zomoto-user',JSON.stringify(res.data))
+
+                console.log(res.data);
+
+                resolve(res.data)
+
+            }).catch((err)=>{
+
+                reject(err)
+
+            })
+
+        })
+
     }
 
 }
