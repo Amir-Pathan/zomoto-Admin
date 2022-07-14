@@ -5,6 +5,8 @@ import routes from './routes';
 import { useEffect, useState } from 'react';
 import Header from './header';
 import Services from './services/service';
+import store from './redux/store';
+import { Provider } from 'react-redux';
 
 function App() {
 
@@ -14,9 +16,7 @@ function App() {
 
     const slr = localStorage.getItem('zomoto-user')
 
-    console.log(slr);
-
-    if(slr!==null){
+     if(slr!==null){
 
       const slrp= JSON.parse(slr)
 
@@ -45,6 +45,7 @@ function App() {
 
   return (
     <>
+     <Provider store={store}>
       <Router>
         {
           loggedIn?
@@ -59,6 +60,7 @@ function App() {
           }
         </Routes>
       </Router>
+     </Provider>
     </>
   );
 }
