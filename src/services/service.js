@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 
+const url ='http://localhost:8089/'
+
 
 const Services ={
 
@@ -18,7 +20,7 @@ const Services ={
 
         let img;
 
-          axios.post('http://localhost:8089/imageUpload/',formData).then((res)=>{
+          axios.post(url+'imageUpload/',formData).then((res)=>{
 
              resolve(res.data.userCreated.profileImg)
 
@@ -37,7 +39,7 @@ const Services ={
 
         return new Promise((resolve,reject)=>{
 
-            axios.get('http://localhost:8089/sellers/'+no).then((res)=>{
+            axios.get(url+'sellers/'+no).then((res)=>{
 
                 resolve(res.data.length)
   
@@ -55,7 +57,7 @@ const Services ={
 
         return new Promise((resolve,reject)=>{
 
-            axios.post('http://localhost:8089/sellers/',user).then((res)=>{
+            axios.post(url+'sellers/',user).then((res)=>{
 
                 localStorage.setItem('zomoto-user',JSON.stringify(res.data))
 
@@ -63,11 +65,53 @@ const Services ={
 
                 resolve(res.data)
 
+                window.location.pathname='/'
+
             }).catch((err)=>{
 
                 reject(err)
 
             })
+
+        })
+
+    },
+    login:(no,password)=>{
+    
+         
+        return new Promise((resolve,reject)=>{
+
+            axios.get(url+'sellers/'+no).then((res)=>{
+
+                if(res.data.length===0){
+
+                    reject({
+                        title:'User Not Found',
+                        content:'Invalid User No this No is not found'
+                    })
+
+                }else{
+
+                if(res.data[0].password===password){
+
+                    localStorage.setItem('zomoto-user',JSON.stringify(res.data[0]))
+
+                    window.location.pathname='/'
+
+                    resolve(true)
+                }else{
+                    reject({
+                        title:'Invalid User Password',
+                        content:'The password is invalid please Enter Valid password'
+                    })
+                }
+                }
+  
+          }).catch((err)=>{
+  
+              reject(err)
+  
+          })
 
         })
 

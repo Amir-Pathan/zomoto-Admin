@@ -28,7 +28,7 @@ const style={
     link:{
       textAlign:'center',
       marginTop:'5px',
-      color:'red  '
+      color:'red'
     }
 }
 
