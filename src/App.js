@@ -1,12 +1,65 @@
 import logo from './logo.svg';
 import './App.css';
-import ImageUpload from './Reusable/imageUpload';
+import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
+import routes from './routes';
+import { useEffect, useState } from 'react';
+import Header from './header';
+import Services from './services/service';
 
 function App() {
+
+  const [loggedIn,setLoggedIn] = useState(false)
+
+  useEffect(()=>{
+
+    const slr = localStorage.getItem('zomoto-user')
+
+    console.log(slr);
+
+    if(slr!==null){
+
+      const slrp= JSON.parse(slr)
+
+        Services.isAble(slrp.no).then((res)=>{
+
+          if(res!==0){
+            setLoggedIn(true)
+          }else{
+            setLoggedIn(false)
+          }
+
+          console.log(res);
+        }).catch((err)=>{console.log(err)})
+
+    }else{
+      if(window.location.pathname!=='/createAccount'){
+        if(window.location.pathname==='/login'){
+          return
+        }else{
+          window.location.pathname='/createAccount'
+        }
+      }
+    }
+
+  },[])
+
   return (
-    <div className="App">
-      <ImageUpload/>
-    </div>
+    <>
+      <Router>
+        {
+          loggedIn?
+            <Header/>
+          :null
+        }
+        <Routes>
+          {
+            routes.map((i,index)=>{
+              return <Route path={i.path} element={i.component} key={index} />
+            })
+          }
+        </Routes>
+      </Router>
+    </>
   );
 }
 
