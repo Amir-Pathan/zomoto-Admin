@@ -115,6 +115,51 @@ const Services ={
 
         })
 
+    },
+
+    addCategory:(category)=>{
+
+        return new Promise((resolve,reject)=>{
+            axios.post(url+'categories/',category).then((res)=>{
+
+                resolve(res.data)
+
+            }).catch((err)=>{
+
+                reject(err)
+
+            })
+        })
+
+    },
+
+    categories:()=>{
+        
+        return new Promise((resolve,reject)=>{
+
+            axios.get(url+'categories/').then((res)=>{
+                resolve(res.data)
+            }).catch((err)=>{
+                reject(err)
+            })
+
+        })
+
+    },
+
+    updateCategory:(category)=>{
+
+        console.log(category);
+
+        return new Promise((resolve,reject)=>{
+
+            axios.put(url+'categories',category).then((res)=>{
+                console.log('hire');
+                resolve(res.data)
+            }).catch((err)=>reject(err))
+
+        })
+
     }
 
 }

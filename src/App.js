@@ -27,8 +27,6 @@ function App() {
           }else{
             setLoggedIn(false)
           }
-
-          console.log(res);
         }).catch((err)=>{console.log(err)})
 
     }else{

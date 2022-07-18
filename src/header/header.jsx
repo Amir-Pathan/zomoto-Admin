@@ -1,6 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { zomotoUser } from '../redux'
+import { AppBar,Box,Toolbar,Button,Typography,IconButton } from '@mui/material'
+import LogoutIcon from '@mui/icons-material/Logout';
+import {useNavigate} from 'react-router-dom'
+
+const style={
+    appBar:{
+        backgroundColor:'white',
+        color:'black',
+    },
+    hotelName:{
+        color:'#cb202d',
+        fontWeight:'bold'
+    },
+    active:{
+      borderBottom:"3px solid #cb202d"
+    }
+}
 
 function Header(){
 
@@ -8,20 +25,54 @@ function Header(){
 
     const [no,setNo] = useState(0)
 
+    const [path,setPath] = useState('')
+
     const dispatch = useDispatch()
 
     const data =useSelector(state=>state.user)
 
+    const navigate=useNavigate()
+
+    const toCategories=()=>{
+      navigate('/categories')
+      setPath(window.location.pathname)
+    }
+
     useEffect(()=>{
         dispatch(zomotoUser())
         setUser(data)
-        console.log(data);
         setNo(1)
     },[no])
 
     return(
         <>
-        <h1>{user.hotelName?user.hotelName:'no'}</h1>
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="fixed" style={style.appBar}>
+           <Toolbar> 
+            <Box sx={{ flexGrow: 1,display:'flex',flexDirection:'row' }}> 
+             <Typography variant="h6" component="div" style={style.hotelName}>
+               {user.hotelName}
+             </Typography>
+              <Button color='inherit' onClick={toCategories}
+              style={path==='/categories'?style.active:null}
+              >Category</Button>
+              <Button color='inherit'>Products</Button>
+              <Button color='inherit'>Orders</Button>
+              {
+                user.no==='7741943487'?
+                <>
+                  <Button color='inherit'>Customers</Button>
+                  <Button color='inherit'>Sellers</Button>
+                </>
+                :null
+              }
+            </Box>
+              <IconButton>
+                <LogoutIcon/>
+              </IconButton>
+             </Toolbar>
+          </AppBar>
+         </Box>
         </>
     )
 
