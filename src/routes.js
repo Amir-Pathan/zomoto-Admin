@@ -2,6 +2,7 @@ import CreateAccount from "./createAccount";
 import Header from "./header";
 import Login from "./login";
 import Categories from "./categories";
+import Products from "./product";
 
 const routes = [
     {
@@ -15,6 +16,10 @@ const routes = [
     {
         component:<Categories/>,
         path:'/categories'
+    },
+    {
+        component:<Products/>,
+        path:'/product/:userId'
     }
 ]
 

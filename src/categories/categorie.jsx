@@ -6,6 +6,8 @@ import ImageUpload from '../Reusable/imageUpload/imageUpload'
 import AlertDialogSlide from '../Reusable/dialog/dialog'
 import Services from '../services'
 import ProductCart from '../Reusable/productCart'
+import { connect } from 'react-redux'
+import { zomotoUser } from '../redux/user/action'
 
 const style={
     page:{
@@ -50,6 +52,9 @@ class Categories extends Component{
     }
 
     componentDidMount(){
+
+        this.props.userDispatch()
+
         Services.categories().then((res)=>{
             
             this.setState({
@@ -95,6 +100,7 @@ class Categories extends Component{
     }
 
     handleChange(e,k){
+        console.log(this.state);
         this.setState({
             ...this.state,
             [k]:e
@@ -185,12 +191,20 @@ class Categories extends Component{
 
 
     render(){
+
+
         return(
-            <>
-               <div style={style.page}>
-                <PlusProduct title='Categories' name='categorie' open={this.openModel}/>
+            <>{
+                this.props.user.no!==undefined?
+                <>
+                <div style={style.page}>
+                    {
+                        this.props.user.no==='7741943487'?
+                          <PlusProduct title='Categories' name='categorie' open={this.openModel}/>
+                        :null
+                    }
                </div>
-               <Grid container item xs={12} md={12} xl={12} style={{marginLeft:'15px',marginTop:'20px'}}>
+               <Grid container item xs={12} md={12} xl={12} style={{marginLeft:'15px',marginTop:'80px'}}>
                {
                 this.state.categories.length>0?
                    this.state.categories.map((i,index)=>{
@@ -262,6 +276,8 @@ class Categories extends Component{
                 close={this.alertClose.bind(this)}
                 />
                </BasicModal>
+               </> :null
+            }
             </>
         )
 
@@ -269,4 +285,17 @@ class Categories extends Component{
 
 }
 
-export default Categories
+const mapStateToProps=(state)=>{
+    console.log(state.user);
+    return {
+        user : state.user
+    }
+}
+
+const mapDispatchToProps=dispatch=>{
+    return{
+        userDispatch: ()=>dispatch(zomotoUser())
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Categories)
