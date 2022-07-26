@@ -6,10 +6,10 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 
-function ProductCart({imgUrl,title,id,description,isActive,update}){
+function ProductCart({imgUrl,title,id,description,isActive,update,isPorduct}){
 
   const [isEnter,setEnter] = useState(false)
-
+  
   const focusEnterHandle=()=>setEnter(true)
 
   const focusOutHandle=()=>setEnter(false)

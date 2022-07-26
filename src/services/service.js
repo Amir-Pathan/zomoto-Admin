@@ -160,6 +160,71 @@ const Services ={
 
         })
 
+    },
+
+    addProduct:(product)=>{
+
+        return new Promise((resolve,reject)=>{
+
+            axios.post(url+'products/',product).then((res)=>{
+                resolve(res.data)
+            }).catch((err)=>{
+                reject(err)
+            })
+
+        })
+
+    },
+
+    getProducts :(isZomoto,userId)=>{
+
+        return new Promise((resolve,reject)=>{
+
+            if(isZomoto){
+                return
+            }else{
+
+                axios.get(url+'products/'+userId).then((res)=>{
+
+                    resolve(res.data)
+
+                }).catch((err)=>reject(err))
+                
+            }
+
+        })
+
+    },
+
+    getProduct:(id)=>{
+
+        return new Promise((resolve,reject)=>{
+ 
+            axios.get(url+'products/product/'+id).then((res)=>{
+
+                resolve(res.data[0])
+
+            }).catch((err)=>{
+
+                reject(err)
+
+            })
+
+        })
+
+    },
+    
+    updateProduct:(product)=>{
+
+        return new Promise((resolve,reject)=>{
+            axios.put(url+'products/',product).then((res)=>{
+
+                resolve(res.data)
+
+            }).catch((err)=>reject(err))
+
+        })
+
     }
 
 }

@@ -38,9 +38,15 @@ function Header(){
       setPath(window.location.pathname)
     }
 
+    const toProduct=()=>{
+      navigate('/product/'+user._id)
+      setPath(window.location.pathname)
+    }
+
     useEffect(()=>{
         dispatch(zomotoUser())
         setUser(data)
+        setPath(window.location.pathname)
         setNo(1)
     },[no])
 
@@ -56,7 +62,11 @@ function Header(){
               <Button color='inherit' onClick={toCategories}
               style={path==='/categories'?style.active:null}
               >Category</Button>
-              <Button color='inherit'>Products</Button>
+              <Button color='inherit'
+              style={path==='/product/'+user._id?style.active:null}
+              onClick={toProduct}
+              >
+                Products</Button>
               <Button color='inherit'>Orders</Button>
               {
                 user.no==='7741943487'?
