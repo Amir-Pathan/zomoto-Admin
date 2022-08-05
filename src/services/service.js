@@ -181,7 +181,13 @@ const Services ={
         return new Promise((resolve,reject)=>{
 
             if(isZomoto){
-                return
+                
+                axios.get(url+'products/').then((res)=>{
+
+                    resolve(res.data)
+
+                }).catch((err)=>reject(err))
+
             }else{
 
                 axios.get(url+'products/'+userId).then((res)=>{
