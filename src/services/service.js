@@ -133,11 +133,11 @@ const Services ={
 
     },
 
-    categories:()=>{
+    getData:(path)=>{
         
         return new Promise((resolve,reject)=>{
 
-            axios.get(url+'categories/').then((res)=>{
+            axios.get(url+path).then((res)=>{
                 resolve(res.data)
             }).catch((err)=>{
                 reject(err)
@@ -230,6 +230,16 @@ const Services ={
             }).catch((err)=>reject(err))
 
         })
+
+    },
+
+    getSeller:()=>{
+
+        const slr = localStorage.getItem('zomoto-user')
+
+        const seller =JSON.parse(slr)
+
+        return seller
 
     }
 

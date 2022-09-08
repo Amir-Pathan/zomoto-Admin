@@ -38,8 +38,8 @@ function Header(){
       setPath(window.location.pathname)
     }
 
-    const toProduct=()=>{
-      navigate('/product/'+user._id)
+    const toProduct=(path)=>{
+      navigate(path)
       setPath(window.location.pathname)
     }
 
@@ -64,10 +64,13 @@ function Header(){
               >Category</Button>
               <Button color='inherit'
               style={path==='/product/'+user._id?style.active:null}
-              onClick={toProduct}
+              onClick={()=>toProduct('/product/'+user._id)}
               >
                 Products</Button>
-              <Button color='inherit'>Orders</Button>
+              <Button color='inherit'
+              onClick={()=>toProduct('/orders')}
+              style={path==='/orders'?style.active:null}
+              >Orders</Button>
               {
                 user.no==='7741943487'?
                 <>
