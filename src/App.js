@@ -27,7 +27,7 @@ function App() {
           }else{
             setLoggedIn(false)
           }
-        }).catch((err)=>{console.log(err)})
+        }).catch((err)=>{console.log(err);})
 
     }else{
       if(window.location.pathname!=='/createAccount'){
@@ -48,7 +48,14 @@ function App() {
         {
           loggedIn?
             <Header/>
-          :null
+          :
+          <div>
+            <h1
+            style={{
+              textAlign:'center'
+            }}
+            >Network Error</h1>
+          </div>
         }
         <Routes>
           {

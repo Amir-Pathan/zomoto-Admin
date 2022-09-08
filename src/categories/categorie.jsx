@@ -55,7 +55,7 @@ class Categories extends Component{
 
         this.props.userDispatch()
 
-        Services.categories().then((res)=>{
+        Services.getData('categories/').then((res)=>{
             
             this.setState({
                 ...this.state,

@@ -40,6 +40,7 @@ function Products(){
     productActive:true,
     productCategory:'',
     userId:'',
+    productCity:''
   }
 
     const [product,setProduct] = useState(initialProduct)
@@ -80,13 +81,23 @@ function Products(){
         productStock:10,
         productActive:true,
         productCategory:'',
-        userId:'',
       })
+    }
+
+    const products=async(id)=>{
+
+      console.log('hire');
+
+       const res= await Services.getProducts(isZomoto,id)
+
+       await setProductList(res)
+
     }
 
     useEffect(()=>{
 
       dispatch(zomotoUser())
+      console.log(5)
       setUser(data)
       setNo(1)
 
@@ -96,19 +107,22 @@ function Products(){
       
       setProduct(prev=>({
         ...prev,
-        userId:data._id
+        userId:data._id,
+        productCity:data.city
       }))
 
       Services.categories().then((res)=>{
         setCategoryList(res)
       }).catch((err)=>{console.log(err);})
 
-      Services.getProducts(isZomoto,data._id).then((res)=>{
+      products(data._id)
+
+    /*  Services.getProducts(isZomoto,data._id).then((res)=>{
         
         setProductList(res)
         console.log(res);
  
-      }).catch((err)=>console.log(err))
+      }).catch((err)=>console.log(err))*/
 
     },[no])
 
@@ -122,11 +136,16 @@ function Products(){
     }
 
     const submitProduct=()=>{
+    
+      const city = data.city
 
       setProduct(prev=>({
         ...prev,
-        userId:data._id
+        userId:data._id,
+        productCity:data.city
       }))
+
+      console.log(city);
 
       console.log(product);
 
@@ -204,6 +223,7 @@ function Products(){
           productActive:res.productActive,
           productCategory:res.productCategory,
           userId:res.userId,
+          productCity:res.productCity
         })
 
         setIsOpen(true)
@@ -370,7 +390,7 @@ function Products(){
                 </Grid>
                 <AlertDialogSlide isOpen={isError} content={content} title={title} close={errorClose}/>
                </BasicModal>
-               <Grid container spacing={1} item xs={12} md={12} style={{marginTop:'10px'}}>
+               <Grid container spacing={1} item xs={12} md={12} style={{marginTop:'70px'}}>
                 {
                   productList.map((i,index)=>{
                     return <Grid item xs={4} md={3} key={index}> 

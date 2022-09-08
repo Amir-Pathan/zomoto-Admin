@@ -133,11 +133,11 @@ const Services ={
 
     },
 
-    categories:()=>{
+    getData:(path)=>{
         
         return new Promise((resolve,reject)=>{
 
-            axios.get(url+'categories/').then((res)=>{
+            axios.get(url+path).then((res)=>{
                 resolve(res.data)
             }).catch((err)=>{
                 reject(err)
@@ -181,7 +181,13 @@ const Services ={
         return new Promise((resolve,reject)=>{
 
             if(isZomoto){
-                return
+                
+                axios.get(url+'products/').then((res)=>{
+
+                    resolve(res.data)
+
+                }).catch((err)=>reject(err))
+
             }else{
 
                 axios.get(url+'products/'+userId).then((res)=>{
@@ -224,6 +230,16 @@ const Services ={
             }).catch((err)=>reject(err))
 
         })
+
+    },
+
+    getSeller:()=>{
+
+        const slr = localStorage.getItem('zomoto-user')
+
+        const seller =JSON.parse(slr)
+
+        return seller
 
     }
 
